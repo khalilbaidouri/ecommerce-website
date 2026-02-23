@@ -6,7 +6,11 @@ import FavoriteIcon from "./FavoriteIcon";
 import CarteIcon from "./CarteIcon";
 import SignIn from "./SignIn";
 import MobileMenu from "./MobileMenu";
-const Header = () => {
+import { currentUser } from "@clerk/nextjs/server"; 
+import { SignedIn, UserButton,ClerkLoaded, ClerkProvider } from "@clerk/nextjs";
+const Header = async() => {
+  const user =await currentUser();
+  console.log(user);
   return (
     <header className="bg-white py-5 border-b border-b-black/20">
       <Container className="flex items-center justify-between">
@@ -19,7 +23,17 @@ const Header = () => {
           <NavSearch />
           <FavoriteIcon />
           <CarteIcon />
-          <SignIn />
+          <ClerkProvider >
+          <ClerkLoaded>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            {
+              !user && <SignIn />
+            }
+          </ClerkLoaded>
+          </ClerkProvider>
+
         </div>
       </Container>
     </header>
