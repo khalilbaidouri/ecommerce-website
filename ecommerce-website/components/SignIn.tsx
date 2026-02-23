@@ -1,10 +1,12 @@
+import { SignInButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 const SignIn = () => {
     return (
-        <Link href="/login" className="text-sm font-medium hover:underline">
+        <SignInButton mode="modal">
             <button className="text-sm font-medium hover:underline cursor-pointer" >Sign In</button>
-        </Link>
+
+        </SignInButton>
     );
 }
 export default SignIn;
